@@ -2,12 +2,17 @@
 
 Open venue connector, reference liquidity bots, and an AI-agent execution interface for Canton Network trading venues.
 
-**Author:** Oleksii Vasiliev, independent developer ([github.com/olevasyliev](https://github.com/olevasyliev))
-**Status:** Proposed
+**Organization:** Individual
+**Author / Primary Contact:** Oleksii Vasiliev, independent developer ([github.com/olevasyliev](https://github.com/olevasyliev))
+**Status:** Submitted
 **Created:** 2026-07-14
-**Updated:** 2026-08-13
+**Updated:** 2026-08-26
+**Proposal Type:** RFP-aligned
+**RFP / Roadmap Area:** RFP 13, Payments and DeFi, under Financial Markets, Standards & Verification ([2026-2028 roadmap](https://github.com/canton-foundation/canton-dev-fund/blob/main/2026-2028-strategic-roadmap.md))
+**Champion:** `Needs Champion`
+**Total Funding Request:** 1,200,000 CC
+**Project Duration:** 5 months
 **Label:** defi-liquidity
-**Champion:** Seeking champion; review requested from the DeFi Protocols & Liquidity SIG.
 
 ---
 
@@ -41,6 +46,16 @@ grant by running this toolkit's own report script, cited under Motivation.
 Give Canton a single open algorithmic-trading layer: one toolkit through which software
 (bots, funds, AI agents) can quote, size, execute, and risk-manage trades on Canton venues.
 
+This is one objective rather than several deliverables sharing a technology. Each milestone
+extends the same artifact and is a strict dependency of the one after it: a strategy places
+its orders through the connector (M1); an order's lifecycle and risk state live in the
+strategy engine (M2); M3 is what makes that lifecycle identical across market structures
+rather than per-venue; and the agent interface (M4) exposes those same primitives with the
+risk caps already enforced beneath them. Drop any one and the layer stops being usable by
+the software it exists to serve. The milestones differ in engineering weight rather than in
+kind, and the tranche split under Funding is sized to that difference; the whole sits inside
+a single five-month window.
+
 ### 2. Implementation Mechanics
 
 - **Venue connector (Python, async):** a unified interface over Canton trading venues, with
@@ -62,6 +77,16 @@ Give Canton a single open algorithmic-trading layer: one toolkit through which s
 
 ### 3. Architectural Alignment
 
+- **RFP 13, Payments and DeFi.** The RFP asks for open-source tooling, reference
+  implementations, and standards for payments, DeFi, settlement, and liquidity workflows, and
+  states that successful proposals should focus on reusable components that support multiple
+  Canton applications rather than one-off application-specific work. That reusability is a
+  measured property of the existing code rather than a design intention: one client already
+  runs against four venues across three market structures, and porting it from the reference
+  DEX's local demo mode to that venue's live Canton participant cost exactly two changes,
+  both inside the adapter. The RFP's own list of prior examples includes the funded DEX reference
+  implementation, whose Milestone 3 names this integration as its concrete reuse proof point,
+  cited under Motivation below.
 - CIP-0082 and CIP-0100 name "DeFi app(s) liquidity seeding" and developer tooling as funded
   categories. This is both in one artifact.
 - Post-CIP-0047 and CIP-0104 tokenomics reward featured apps on real activity, and an open
